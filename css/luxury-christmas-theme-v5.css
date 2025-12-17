@@ -1,0 +1,142 @@
+:root {
+    /* Quantum Palette V5.0 */
+    --color-base-dark: #1A1A2E;
+    --color-accent-gold: #D4AF37;
+    --color-highlight-snow: #E0F7FA;
+    --color-holiday-crimson: #B00020;
+    --color-holiday-emerald: #006400;
+    --font-luxury: 'Cormorant Garamond', serif;
+}
+
+/* Import Luxury Font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap');
+
+/* Global Antigravity Transitions */
+* {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+body {
+    /* Luxury Background Fallback (Quantum Gradient) */
+    background: radial-gradient(circle at 50% 20%, #4a0010 0%, var(--color-base-dark) 60%, #000 100%);
+    /* We add a subtle pattern overlay if possible, or just deep gradient */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Outfit', sans-serif;
+}
+
+
+/* Luxury Typography Overrides */
+h1,
+h2,
+h3,
+.pricing-header {
+    font-family: var(--font-luxury) !important;
+    letter-spacing: 1px;
+}
+
+h1 {
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to right, #fff, var(--color-accent-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Showcase Carousel Container */
+#showcase-carousel {
+    display: flex;
+    gap: 20px;
+    padding: 30px 20px;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto 20px;
+    perspective: 1000px;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+#showcase-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.showcase-thumb {
+    min-width: 200px;
+    height: 112px;
+    /* 16:9 approx */
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    border: 2px solid transparent;
+    filter: brightness(0.8) blur(0.5px);
+    flex-shrink: 0;
+}
+
+.showcase-thumb:hover {
+    transform: scale(1.1) rotateX(2deg);
+    border-color: var(--color-accent-gold);
+    filter: brightness(1.1) blur(0);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+    z-index: 10;
+}
+
+/* Snow Container */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    /* Low z-index to be behind text but over bg */
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: var(--color-highlight-snow);
+    font-size: 1.2em;
+    opacity: 0.8;
+    user-select: none;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translateY(110vh) translateX(50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Button Aesthetics */
+.cta-button {
+    background: linear-gradient(135deg, var(--color-holiday-crimson), #800010);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(176, 0, 32, 0.6);
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, #800010, var(--color-holiday-crimson));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(176, 0, 32, 0.8), 0 0 15px var(--color-accent-gold);
+}
