@@ -44,51 +44,7 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
-/* Showcase Carousel Container */
-#showcase-carousel {
-    display: flex;
-    gap: 20px;
-    padding: 30px 20px;
-    overflow-x: auto;
-    width: 100%;
-    max-width: 1200px;
-    margin: 40px auto 20px;
-    perspective: 1000px;
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* IE */
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-#showcase-carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.showcase-thumb {
-    min-width: 200px;
-    height: 112px;
-    /* 16:9 approx */
-    border-radius: 12px;
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    border: 2px solid transparent;
-    filter: brightness(0.8) blur(0.5px);
-    flex-shrink: 0;
-}
-
-.showcase-thumb:hover {
-    transform: scale(1.1) rotateX(2deg);
-    border-color: var(--color-accent-gold);
-    filter: brightness(1.1) blur(0);
-    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
-    z-index: 10;
-}
-
-/* Snow Container */
+/* Showcase Carousel/* 2. Efecto Nieve Persistente (CSS Base) */
 #snow-container {
     position: fixed;
     top: 0;
@@ -96,36 +52,9 @@ h1 {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
-    /* Low z-index to be behind text but over bg */
-    overflow: hidden;
-}
-
-.snowflake {
-    position: absolute;
-    top: -10px;
-    color: var(--color-highlight-snow);
-    font-size: 1.2em;
-    opacity: 0.8;
-    user-select: none;
-    pointer-events: none;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(-10vh) translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    10% {
-        opacity: 0.9;
-    }
-
-    100% {
-        transform: translateY(110vh) translateX(50px) rotate(360deg);
-        opacity: 0;
-    }
+    /* Permite hacer clic a través de la nieve */
+    z-index: 9999;
+    /* Alto z-index para que esté por encima de todo */
 }
 
 /* Enhanced Button Aesthetics */
@@ -139,4 +68,96 @@ h1 {
     background: linear-gradient(135deg, #800010, var(--color-holiday-crimson));
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(176, 0, 32, 0.8), 0 0 15px var(--color-accent-gold);
+}
+
+/* 1. Transiciones Antigravity (Global) */
+/* Aplicado a todos los elementos interactivos para transiciones suaves */
+.antigravity-transition,
+#showcase-carousel a,
+#showcase-carousel img {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 3. Carrusel de Miniaturas de Trabajos (Showcase) */
+#showcase-carousel {
+    /* Estilo base del contenedor */
+    margin-top: 40px;
+    padding: 20px 0;
+    overflow-x: scroll;
+    /* Permite el scroll horizontal */
+    overflow-y: hidden;
+    white-space: nowrap;
+    /* Mantiene los elementos en una sola línea */
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    /* Ocultar la barra de desplazamiento */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+#showcase-carousel::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+/* Contenedor de las miniaturas */
+.showcase-item {
+    display: inline-block;
+    width: 250px;
+    /* Ancho fijo para las miniaturas */
+    height: 140.625px;
+    /* 16:9 de 250px */
+    margin-right: 15px;
+    border: 1px solid transparent;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    /* Adding border radius to match previous style preference */
+    background: rgba(255, 255, 255, 0.05);
+    /* Default bg */
+}
+
+.showcase-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Transiciones de Lujo (Hover) */
+.showcase-item:hover {
+    transform: scale(1.05);
+    /* Escalar ligeramente */
+    border: 1px solid var(--color-accent-gold, #D4AF37);
+    /* Borde dorado */
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+    /* Glow dorado */
+    z-index: 20;
+}
+
+/* Efecto de Desenfoque (Blur) en los bordes */
+#showcase-carousel::before,
+#showcase-carousel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    /* Ancho del desenfoque */
+    pointer-events: none;
+    z-index: 10;
+}
+
+#showcase-carousel::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-base-dark, #1A1A2E) 0%, rgba(26, 26, 46, 0) 100%);
+}
+
+#showcase-carousel::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-base-dark, #1A1A2E) 0%, rgba(26, 26, 46, 0) 100%);
 }
